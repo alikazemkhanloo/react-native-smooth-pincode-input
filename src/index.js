@@ -33,6 +33,7 @@ class SmoothPinCodeInput extends Component {
   state = {
     maskDelay: false,
     focused: false,
+    value: this.props.initValue,
   };
   ref = React.createRef();
   inputRef = React.createRef();
@@ -51,7 +52,7 @@ class SmoothPinCodeInput extends Component {
 
   _inputCode = (code) => {
     const { password, codeLength = 4, onTextChange, onFulfill } = this.props;
-
+    this.setState({value:code})
     if (onTextChange) {
       onTextChange(code);
     }
@@ -84,7 +85,6 @@ class SmoothPinCodeInput extends Component {
 
   render() {
     const {
-      value,
       codeLength, cellSize, cellSpacing,
       placeholder,
       password,
@@ -99,7 +99,7 @@ class SmoothPinCodeInput extends Component {
       keyboardType,
       animationFocused,
     } = this.props;
-    const { maskDelay, focused } = this.state;
+    const { maskDelay, focused, value } = this.state;
     return (
       <Animatable.View
         ref={this.ref}
